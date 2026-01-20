@@ -89,6 +89,8 @@ create table archive(
  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-insert into roles("Admin"),
-("Candidat"),
-("Recruteur");
+INSERT INTO roles (title)
+VALUES
+  ('Admin'),
+  ('Candidat'),
+  ('Recruteur');
