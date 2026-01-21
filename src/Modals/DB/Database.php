@@ -1,5 +1,7 @@
 <?php
-
+namespace App\Modals\DB;
+use PDO;
+use PDOException;
 class Database
 {
 
