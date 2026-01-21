@@ -59,7 +59,7 @@ class Poste
          $this->id = $id;
     }
     public function setPosition($position) {
-        $this->poste = $position;
+        $this->position = $position;
     }
     public function setCategorie($category) {
          $this->category = $category;

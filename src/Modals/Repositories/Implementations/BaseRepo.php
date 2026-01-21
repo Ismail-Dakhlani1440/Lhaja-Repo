@@ -10,13 +10,17 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         $this->tableName = $tableName;
     }
 
+    //doesnt take anything
     public function fetchAll()
     {
         $query = "SELECT * FROM {$this->tableName}";
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // returns null or an array of all the objects in the database
 
+    // takes an string of the property name just like its called in the database and the value of the property example for users
+    // UserRepo->fetchByProperty('id',1)
     public function fetchByProperty($property, $value)
     {
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->tableName . " WHERE " . $property . " = :" . $property);
@@ -24,7 +28,9 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    // returns null or an array of objects that matches the property 
 
+    // takes an object and inserts it into the database
    public function insert($data) {
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
@@ -34,18 +40,23 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         }
         return $stmt->execute();
     }
+    // retuns the null or the last id insterted into the table of the repo called
 
+    // takes an id and an object and updates the row based on the new data in the object;
     public function edit($id, $data)
     {
         $query = "UPDATE {$this->tableName} SET ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$data, $id]);
     }
+    //returns True or False based on if it finds the data in the database
 
+    //takes an id and deletes the row
     public function delete($id)
     {
         $query = "DELETE FROM {$this->tableName} WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$id]);
     }
+    //returns True or False based on if it finds the data in the database
 }
