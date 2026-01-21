@@ -11,7 +11,7 @@ class Candidator
         $candidat,
         $poste,
         $motif,
-        $status = "approved",
+        $status = "pending",
         $datePostulation = ""
     ) {
         $this->candidat = $candidat;
