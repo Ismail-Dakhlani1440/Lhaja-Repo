@@ -4,6 +4,7 @@ use PDO;
 use PDOException;
 class Database
 {
+
     private static ?Database $instance = null;
 
     private PDO $connection;
@@ -13,7 +14,7 @@ class Database
         $host = "localhost";
         $dbname = "emploi";
         $user = "root";
-        $pass = "";
+       $pass = "";
 
         try {
             $this->connection = new PDO(
@@ -21,20 +22,18 @@ class Database
                 $user,
                 $pass
             );
-            $this->connection->setAttribute(
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            );
+          
         } catch (PDOException $e) {
             die("Erreur de connexion : " . $e->getMessage());
         }
     }
-    public static function getInstance()
+        public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new Database();
-        }
-        return self::$instance->connection;
+            
+        }        return self::$instance->connection;
     }
 
 }
+
