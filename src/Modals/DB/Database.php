@@ -1,5 +1,7 @@
 <?php
-
+namespace App\Modals\DB;
+use PDO;
+use PDOException;
 class Database
 {
 
@@ -12,7 +14,7 @@ class Database
         $host = "localhost";
         $dbname = "emploi";
         $user = "root";
-        $pass = "";
+       $pass = "";
 
         try {
             $this->connection = new PDO(
@@ -37,3 +39,4 @@ class Database
     }
     
 }
+
