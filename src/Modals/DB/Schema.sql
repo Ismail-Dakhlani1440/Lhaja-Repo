@@ -47,7 +47,7 @@ CREATE TABLE postes (
     lieu VARCHAR(100),
     poste VARCHAR(100) NOT NULL,
     mission TEXT,
-    salaire DECIMAL(10,2)
+    salaire DECIMAL(10,2),
     categorie_id INT,
     recruteur_id INT,
     FOREIGN KEY (categorie_id) REFERENCES categories(id),
