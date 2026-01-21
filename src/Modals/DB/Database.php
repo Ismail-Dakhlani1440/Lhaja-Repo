@@ -30,13 +30,13 @@ class Database
             die("Erreur de connexion : " . $e->getMessage());
         }
     }
-        public static function getInstance()
+    public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new Database();
-            
-        }        return self::$instance->connection;
+        }
+        return self::$instance->connection;
     }
-
+    
 }
 
