@@ -28,16 +28,12 @@ class Database
             die("Erreur de connexion : " . $e->getMessage());
         }
     }
-    public static function getInstance(): Database
+    public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new Database();
         }
-        return self::$instance;
+        return self::$instance->connection;
     }
-
-    public function getConnection(): PDO
-    {
-        return $this->connection;
-    }
+    
 }

@@ -17,8 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE candidats (
     user_id INT PRIMARY KEY,
-    min_salaire DECIMAL(10,2),
-    max_salaire DECIMAL(10,2),
+    min_salaire DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) 
 );
 
@@ -47,7 +46,7 @@ CREATE TABLE postes (
     lieu VARCHAR(100),
     poste VARCHAR(100) NOT NULL,
     mission TEXT,
-    salaire DECIMAL(10,2)
+    salaire DECIMAL(10,2),
     categorie_id INT,
     recruteur_id INT,
     FOREIGN KEY (categorie_id) REFERENCES categories(id),
