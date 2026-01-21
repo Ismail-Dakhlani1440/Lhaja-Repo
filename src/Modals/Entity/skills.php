@@ -3,12 +3,38 @@ class Skills
 {
     private $id;
     private $title;
-    private $categoryId;
+    private $category;
 
-    public function __construct($title, $categoryId, $id = 0)
+    public function __construct($title, $category, $id = 0)
     {
         $this->id = $id;
         $this->title = $title;
-        $this->categoryId = $categoryId;
+        $this->category = $category;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    public function geCategory()
+    {
+        return $this->category;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+    public function seCategory($category)
+    {
+        $this->category = $category;
     }
 }

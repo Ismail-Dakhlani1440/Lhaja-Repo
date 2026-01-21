@@ -2,19 +2,47 @@
 class Archive
 {
     private  $id;
-    private  $userId;
-    private  $posteId;
+    private  $admin;
+    private  $poste;
     private  $dateArchive;
 
     public function __construct(
-         $userId,
-         $posteId,
+         $admin,
+         $poste,
          $dateArchive = "",
-         $id = 0
+         $id = null
     ) {
         $this->id = $id;
-        $this->userId = $userId;
-        $this->posteId = $posteId;
+        $this->admin = $admin;
+        $this->poste = $poste;
         $this->dateArchive = $dateArchive;
+    }
+
+    public function getid(){
+        return $this->id;
+    }
+    public function getadmin(){
+        return $this->admin;
+    }
+    public function getpost(){
+        return $this->poste;
+    }
+    public function getdateArchive(){
+        return $this->dateArchive;
+    }
+
+    public function setid($id){
+         $this->id = $id;
+    }
+    public function setadmin($admin){
+         $this->admin = $admin;
+       
+    }
+    public function setposte($poste){
+          $this->poste = $poste;
+       
+    }
+    public function setdateArchives($dateArchive){
+         $this->dateArchive = $dateArchive;
     }
 }

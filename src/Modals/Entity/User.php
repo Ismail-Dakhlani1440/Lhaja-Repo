@@ -3,24 +3,24 @@
 
 class User
 {
-    protected  $id;
-    protected  $name;
-    protected  $email;
-    protected  $password;
-    protected  $roleId;
+    protected $id;
+    protected $name;
+    protected $email;
+    protected $password;
+    protected $role;
 
     public function __construct(
-         $name,
-         $email,
-         $password,
-         $roleId,
-         $id = 0
+        $name,
+        $email,
+        $password,
+        $role,
+        $id = null
     ) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->roleId = $roleId;
+        $this->role = $role;
     }
 
     public function setid($id)
@@ -39,9 +39,9 @@ class User
     {
         $this->password = $password;
     }
-    public function setrolid($roleId)
+    public function setrolid($role)
     {
-        $this->roleId = $roleId;
+        $this->roleId = $role;
     }
 
 
@@ -64,7 +64,7 @@ class User
     }
     public function getroleid()
     {
-        return $this->roleId;
+        return $this->role;
     }
 
 
