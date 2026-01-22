@@ -41,7 +41,7 @@ class User
     }
     public function setrolid($role)
     {
-        $this->roleId = $role;
+        $this->role = $role;
     }
 
 

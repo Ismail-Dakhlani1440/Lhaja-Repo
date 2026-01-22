@@ -67,14 +67,14 @@
                     <form>
 
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Adresse email" required>
+                            <input type="email"  name ="email" class="form-control" placeholder="Adresse email" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Mot de passe" required>
+                            <input type="password" name ="password"class="form-control" placeholder="Mot de passe" required>
                         </div>
 
-                        <button type="submit" class="btn btn-main text-white w-100 mt-3">
+                        <button type="submit"  name ="submit" class="btn btn-main text-white w-100 mt-3">
                             Se connecter
                         </button>
 

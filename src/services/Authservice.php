@@ -1,57 +1,72 @@
 <?php
 
-namespace App\services;
+namespace App\Services;
 
-use App\Models\Repositories\Implementation;
+use App\Models\Repositories\Implementations\UserRepo;
 
 class AuthService
 {
     private UserRepo $userRepo;
 
-    public function __construct($userRepo)
+    public function __construct(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
 
         
     }
 
-    public function register($data)
+    public function register(array $data): bool
     {
-        if ($this->userRepo->findByProperty('email',$data['email'])) {
-            $error ='invalid credentials';
-            return $error;
+        if ($this->userRepo->findByProperty('email', $data['email'])) {
+            return false; 
         }
 
         $passwordHash = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $this->userRepo->insert([
+        $insertData = [
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => $passwordHash,
-            'role'     => $data['role']
-        ]);
+            'role'     => $data['role'],
+            'city'     => $data['city'] ?? null,
+        ];
 
-        return null;
+        if ($data['role'] === 'candidate') {
+            $insertData['title']  = $data['title'] ?? null;
+            $insertData['skills'] = $data['skills'] ?? null;
+            $insertData['salary'] = $data['salary'] ?? null;
+        }
+
+        if ($data['role'] === 'recruiter') {
+            $insertData['company']  = $data['company'] ?? null;
+            $insertData['category'] = $data['category'] ?? null;
+        }
+
+        $this->userRepo->insert($insertData);
+        return true;
     }
 
-  
-    public function login($email, $password)
+    public function login(string $email, string $password): bool
     {
-        $user = $this->userRepo->findByProperty('email',$email);
+        $user = $this->userRepo->findByProperty('email', $email);
 
         if (!$user || !password_verify($password, $user['password'])) {
             return false;
         }
 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role']    = $user['role'];
-        $_SESSION['email']   = $user['email'];
+        session_regenerate_id(true);
+        $_SESSION['user'] = [
+            'id'    => $user['id'],
+            'email' => $user['email'],
+            'role'  => $user['role'],
+        ];
 
         return true;
     }
 
-    public function logout()
+    public function logout(): void
     {
+        session_unset();
         session_destroy();
     }
 }
