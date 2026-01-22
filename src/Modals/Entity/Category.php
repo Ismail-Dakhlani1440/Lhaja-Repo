@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Modals\Entity;
+
+use App\Modals\Entity\Skill;
+
 class Category
 {
     private  $id;
@@ -27,7 +32,7 @@ class Category
         $this->title = $title;
     }
     public function addCatergoryskills($title , $category , $id = null){
-        $addCategorys_skills = new Skills($this , $title , $category , $id);
+        $addCategorys_skills = new Skill($this , $title , $category , $id);
         $this->skills[] = $addCategorys_skills;
         return $addCategorys_skills;
     }

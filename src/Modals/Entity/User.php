@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Modals\Entity;
 
 class User
 {
@@ -23,46 +24,46 @@ class User
         $this->role = $role;
     }
 
-    public function setid($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
-    public function setname($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
-    public function setemail($email)
+    public function setEmail($email)
     {
         $this->email = $email;
     }
-    public function setpassword($password)
+    public function setPassword($password)
     {
         $this->password = $password;
     }
-    public function setrolid($role)
+    public function setRole($role)
     {
         $this->role = $role;
     }
 
 
-    public function getid()
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getname()
+    public function getName()
     {
         return $this->name;
     }
-    public function getemail()
+    public function getEmail()
     {
         return $this->email;
     }
-    public function getpassword()
+    public function getPassword()
     {
         return $this->password;
     }
-    public function getroleid()
+    public function getRole()
     {
         return $this->role;
     }
