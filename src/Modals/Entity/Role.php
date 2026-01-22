@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Modals\Entity;
+
 class Role
 {
     private $id;

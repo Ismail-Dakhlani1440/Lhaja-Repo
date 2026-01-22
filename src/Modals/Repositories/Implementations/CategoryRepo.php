@@ -3,12 +3,11 @@
 namespace App\Modals\Repositories\Implementations;
 
 use App\Modals\Repositories\Implementations\BaseRepo;
-use App\Mappers\RoleMapper;
+use App\Mappers\CategoryMapper;
 
-class RoleRepo extends BaseRepo
+class CategoryRepo extends BaseRepo
 {
     private static $table = "roles";
-
     public function __construct()
     {
         parent::__construct(self::$table);
@@ -16,37 +15,37 @@ class RoleRepo extends BaseRepo
 
     public function fetchAll()
     {
-        $roles = [];
+        $categories = [];
         $rows = parent::fetchAll();
         foreach ($rows as $row) {
-            $roles[] = RoleMapper::map($row);
+            $categories[] = CategoryMapper::map($row);
         }
-        return $roles;
+        return $categories;
     }
 
     public function fetchByProperty($property, $value)
     {
         $rows = parent::fetchByProperty($property, $value);
         if (is_array($rows[0])) {
-            $roles = [];
+            $categories = [];
             foreach ($rows as $row) {
-                $roles[] = RoleMapper::map($row);
+                $categories[] = CategoryMapper::map($row);
             }
         } else {
-            $roles = [RoleMapper::map($rows)];
+            $categories = [CategoryMapper::map($rows)];
         }
-        return $roles;
+        return $categories;
     }
 
-    public function insert($objet)
+    public function insert($object)
     {
-        $data = RoleMapper::reverseMap($objet);
+        $data = CategoryMapper::reverseMap($object);
         return parent::insert($data);
     }
 
-    public function edit($id, $objet)
+    public function edit($id, $object)
     {
-        $data = RoleMapper::reverseMap($objet);
+        $data = CategoryMapper::reverseMap($object);
         return parent::edit($id, $data);
     }
 
@@ -54,5 +53,4 @@ class RoleRepo extends BaseRepo
     {
         return parent::delete($id);
     }
-
 }

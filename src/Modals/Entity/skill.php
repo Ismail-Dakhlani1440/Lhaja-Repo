@@ -1,5 +1,8 @@
 <?php
-class Skills
+
+namespace App\Modals\Entity;
+
+class Skill
 {
     private $id;
     private $title;
@@ -20,7 +23,7 @@ class Skills
     {
         return $this->title;
     }
-    public function geCategory()
+    public function getCategory()
     {
         return $this->category;
     }
@@ -33,7 +36,7 @@ class Skills
     {
         $this->title = $title;
     }
-    public function seCategory($category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }

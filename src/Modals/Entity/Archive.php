@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Modals\Entity;
+
 class Archive
 {
     private  $id;
