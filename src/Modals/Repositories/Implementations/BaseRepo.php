@@ -53,9 +53,18 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
     // takes an id and an object and updates the row based on the new data in the object;
     public function edit($id, $data)
     {
-        $query = "UPDATE {$this->tableName} SET ? WHERE id = ?";
+        $query = "UPDATE {$this->tableName} SET ";
+        $placeholders = [];
+        foreach ($data as $key => $value) {
+            $placeholders[] = $key . " = :" . $key;
+        }
+        $query .= implode(", ", $placeholders);
+        $query .= " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$data, $id]);
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(':' . $key, $value);
+        }
+        $stmt->execute([$id]);
     }
     //returns True or False based on if it finds the data in the database
 
