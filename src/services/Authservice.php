@@ -15,9 +15,15 @@ class AuthService
 
     public function register($data)
     {
+<<<<<<< HEAD
         // FIX: Added || (OR) operators
         if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
             return false; // Or throw exception
+=======
+        if ($this->userRepo->fetchByProperty('email',$data['email'])) {
+            $error ='invalid credentials';
+            return $error;
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c
         }
 
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -27,12 +33,18 @@ class AuthService
 
     public function login(string $email, string $password): bool
     {
+<<<<<<< HEAD
         // Returns User Object or Null
         $user = $this->userRepo->fetchByProperty('email', $email);
 
         // FIX: Check if null OR password mismatch
         // Note: Using ->getPassword() because $user is now an Object from UserMapper
         if (!$user || !password_verify($password, $user->getPassword())) {
+=======
+        $user = $this->userRepo->fetchByProperty('email',$email);
+
+        if (count($user) !=1 || !password_verify($password, $user[0]->getPassword())) {
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c
             return false;
         }
 

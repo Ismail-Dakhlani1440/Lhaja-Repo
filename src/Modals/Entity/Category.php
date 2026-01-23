@@ -31,6 +31,11 @@ class Category
     public function setTitle($title){
         $this->title = $title;
     }
+
+    public function setSkills($skills){
+        $this->skills = $skills;
+    }
+
     public function addCatergoryskills($title , $category , $id = null){
         $addCategorys_skills = new Skill($this , $title , $category , $id);
         $this->skills[] = $addCategorys_skills;

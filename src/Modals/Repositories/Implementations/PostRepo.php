@@ -32,13 +32,9 @@ class PostRepo extends BaseRepo
     public function fetchByProperty($property, $value)
     {
         $rows = parent::fetchByProperty($property, $value);
-        if (is_array($rows[0])) {
-            $posts = [];
-            foreach ($rows as $row) {
-                $posts[] = PostMapper::map($row, $this->categoryRepo->fetchByProperty('id', $row['categoryId']), $this->userRepo->fetchByProperty('id', $row['userId']));
-            }
-        } else {
-            $posts = [PostMapper::map($rows, $this->categoryRepo->fetchByProperty('id', $rows['categoryId']), $this->userRepo->fetchByProperty('id', $rows['userId']))];
+        $posts = [];
+        foreach ($rows as $row) {
+            $posts[] = PostMapper::map($row, $this->categoryRepo->fetchByProperty('id', $row['categoryId']), $this->userRepo->fetchByProperty('id', $row['userId']));
         }
         return $posts;
     }

@@ -26,10 +26,17 @@ class RoleRepo extends BaseRepo
 
     public function fetchByProperty($property, $value)
     {
+<<<<<<< HEAD
         $row = parent::fetchByProperty($property, $value);
 
         if (!$row) {
             return null; // Return null if not found
+=======
+        $rows = parent::fetchByProperty($property, $value);
+        $roles = [];
+        foreach ($rows as $row) {
+            $roles[] = RoleMapper::map($row);
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c
         }
 
         // Fix: Return the direct Object, not an array [Object]
@@ -50,4 +57,12 @@ class RoleRepo extends BaseRepo
         // return parent::edit($id, $data);
         return;
     }
+<<<<<<< HEAD
+=======
+
+    public function delete($id)
+    {
+        return parent::delete($id);
+    }
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c
 }
