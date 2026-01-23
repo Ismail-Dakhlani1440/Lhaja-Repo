@@ -11,54 +11,37 @@ class AuthService
     public function __construct(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
-
-        
     }
 
-    public function register(array $data): bool
+    public function register($data)
     {
-        if ($this->userRepo->fetchByProperty('email', $data['email'])) {
-            return false; 
+        // FIX: Added || (OR) operators
+        if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
+            return false; // Or throw exception
         }
 
-        $passwordHash = password_hash($data['password'], PASSWORD_DEFAULT);
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $insertData = [
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => $passwordHash,
-            'role'     => $data['role'],
-            'city'     => $data['city'] ?? null,
-        ];
-
-        if ($data['role'] === 'candidate') {
-            $insertData['title']  = $data['title'] ?? null;
-            $insertData['skills'] = $data['skills'] ?? null;
-            $insertData['salary'] = $data['salary'] ?? null;
-        }
-
-        if ($data['role'] === 'recruiter') {
-            $insertData['company']  = $data['company'] ?? null;
-            $insertData['category'] = $data['category'] ?? null;
-        }
-
-        $this->userRepo->insert($insertData);
-        return true;
+        return $this->userRepo->insert($data);
     }
 
     public function login(string $email, string $password): bool
     {
+        // Returns User Object or Null
         $user = $this->userRepo->fetchByProperty('email', $email);
 
-        if (count($user) != 1  || !password_verify($password, $user[0]->getPassword())) {
+        // FIX: Check if null OR password mismatch
+        // Note: Using ->getPassword() because $user is now an Object from UserMapper
+        if (!$user || !password_verify($password, $user->getPassword())) {
             return false;
         }
 
         session_regenerate_id(true);
         $_SESSION['user'] = [
-            'id'    => $user['id'],
-            'email' => $user['email'],
-            'role'  => $user['role'],
+            'id'    => $user->getId(),
+            'email' => $user->getEmail(),
+            // Assuming Role object has a getTitle() method
+            'role'  => $user->getRole()->getTitle(), 
         ];
 
         return true;

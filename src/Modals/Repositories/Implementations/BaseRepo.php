@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Modals\Repositories\Implementations;
+
 use App\Modals\DB\Database;
-use App\Modals\Repositories\Interfaces\FetchInterface;
-use App\Modals\Repositories\Interfaces\InsertIterface;
-use App\Modals\Repositories\Interfaces\EditInterface;
-use App\Modals\Repositories\Interfaces\DeleteIterface;
+use App\Modals\Repositories\FetchInterface;
+use App\Modals\Repositories\InsertIterface;
+use App\Modals\Repositories\EditInterface;
+use App\Modals\Repositories\DeleteIterface;
 use PDO;
 
 abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,DeleteIterface

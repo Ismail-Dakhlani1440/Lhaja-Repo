@@ -2,57 +2,52 @@
 
 namespace App\Modals\Repositories\Implementations;
 
-use App\Modals\Repositories\Implementations\BaseRepo;
 use App\Mappers\RoleMapper;
 
 class RoleRepo extends BaseRepo
 {
-    private static $table = "roles";
-
     public function __construct()
     {
-        parent::__construct(self::$table);
+        // Fix: __construct and parent::__construct
+        parent::__construct("roles");
     }
 
     public function fetchAll()
     {
-        $roles = [];
         $rows = parent::fetchAll();
+        $roles = [];
+
         foreach ($rows as $row) {
             $roles[] = RoleMapper::map($row);
         }
+
         return $roles;
     }
 
     public function fetchByProperty($property, $value)
     {
-        $rows = parent::fetchByProperty($property, $value);
-        if (is_array($rows[0])) {
-            $roles = [];
-            foreach ($rows as $row) {
-                $roles[] = RoleMapper::map($row);
-            }
-        } else {
-            $roles = [RoleMapper::map($rows)];
+        $row = parent::fetchByProperty($property, $value);
+
+        if (!$row) {
+            return null; // Return null if not found
         }
-        return $roles;
+
+        // Fix: Return the direct Object, not an array [Object]
+        return RoleMapper::map($row);
     }
 
-    public function insert($objet)
+    public function insert($roleEntity)
     {
-        $data = RoleMapper::reverseMap($objet);
+        // Convert Entity object -> Database Array
+        $data = RoleMapper::reverseMap($roleEntity);
         return parent::insert($data);
     }
 
-    public function edit($id, $objet)
+    public function edit($id, $roleEntity)
     {
-        $data = RoleMapper::reverseMap($objet);
-        return parent::edit($id, $data);
+        // Convert Entity object -> Database Array
+        $data = RoleMapper::reverseMap($roleEntity);
+        // return parent::edit($id, $data);
+        return;
     }
-
-    public function delete($id)
-    {
-        return parent::delete($id);
-    }
-
 }

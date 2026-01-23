@@ -17,7 +17,6 @@ CREATE TABLE users (
 
 CREATE TABLE candidats (
     user_id INT PRIMARY KEY,
-    min_salaire DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) 
 );
 

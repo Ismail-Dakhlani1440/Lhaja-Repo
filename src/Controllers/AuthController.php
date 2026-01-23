@@ -2,71 +2,56 @@
 
 namespace App\Controllers;
 
+use App\Modals\Repositories\Implementations\RoleRepo;
+use App\Modals\Repositories\Implementations\UserRepo;
 use App\Services\AuthService;
 
-class AuthController
+class AuthController extends AbstractController
 {
-    private AuthService $authService;
+    private $authService;
 
-    public function __construct(AuthService $authService)
+    public function __construct()
     {
-        $this->authService = $authService;
+        // FIX: Chain the dependencies correctly
+        // RoleRepo -> goes into -> UserRepo -> goes into -> AuthService
+        $roleRepo = new RoleRepo();
+        $userRepo = new UserRepo($roleRepo);
 
-       
+        $this->authService = new AuthService($userRepo);
     }
 
     public function register(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
-        // Candidat
-        if (isset($_POST['candidat'])) {
-            $role = 'candidate';
-            $passwordConfirm = $_POST['confirm password']; 
-            $data = [
-                'name'     => $_POST['name'],
-                'email'    => $_POST['email'],
-                'password' => $_POST['password'],
-                'role'     => $role,
-                'title'    => $_POST['titre'] ?? null,
-                'skills'   => $_POST['compétences'] ?? null,
-                'salary'   => $_POST['salaire'] ?? null,
-                'city'     => $_POST['ville'] ?? null,
-            ];
+        $passwordConfirm = $_POST['passwordConfirm'] ?? '';
+        $password = $_POST['password'] ?? '';
 
-            if ($data['password'] !== $passwordConfirm) {
-                die("Les mots de passe ne correspondent pas");
-            }
-
-            if ($this->authService->register($data)) {
-                echo "Compte candidat créé avec succès";
-            } else {
-                echo "Email déjà utilisé";
-            }
+        if ($password !== $passwordConfirm) {
+            die("Les mots de passe ne correspondent pas");
         }
 
-        elseif (isset($_POST['recruteur'])) {
-            $role = 'recruiter';
-            $passwordConfirm = $_POST['confirmpassword'];
-            $data = [
-                'name'     => $_POST['name'],
-                'email'    => $_POST['email'],
-                'password' => $_POST['password'],
-                'role'     => $role,
-                'company'  => $_POST['nomentreprise'] ?? null,
-                'category' => $_POST['categories'] ?? null,
-                'city'     => $_POST['ville'] ?? null,
-            ];
+        // Simplify data gathering
+        $data = [
+            'name'     => trim($_POST['name']),
+            'email'    => trim($_POST['email']),
+            'password' => $password,
+        ];
 
-            if ($data['password'] !== $passwordConfirm) {
-                die("Les mots de passe ne correspondent pas");
-            }
+        // Specific logic
+        if (isset($_POST['candidat'])) {
+            $data['roleId'] = 2; // Example ID for Candidate
+            // Add other candidate fields...
+        } elseif (isset($_POST['recruteur'])) {
+            $data['roleId'] = 3; // Example ID for Recruiter
+            // Add other recruiter fields...
+        }
 
-            if ($this->authService->register($data)) {
-                echo "Compte recruteur créé avec succès";
-            } else {
-                echo "Email déjà utilisé";
-            }
+        if ($this->authService->register($data)) {
+            header('Location: /login');
+            exit;
+        } else {
+            echo "Erreur lors de l'inscription";
         }
     }
 
@@ -74,26 +59,28 @@ class AuthController
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        if ($this->authService->login($email, $password)) {
-            echo "Connexion réussie";
-            // Redirection selon rôle
+        if ($this->authService->login($_POST['email'], $_POST['password'])) {
+            // Redirect based on the session role set in AuthService
             if ($_SESSION['user']['role'] === 'recruiter') {
-                header('Location: /recruiter/dashboard');
+                header('Location: /recruteur/dashboard.php');
             } else {
-                header('Location: /candidate/dashboard');
+                header('Location: /candidate/dashboard.php');
             }
             exit;
         }
 
-        die("Email ou mot de passe incorrect");
+        echo "Email ou mot de passe incorrect";
     }
+
+    public function getViewRegister()
+    {
+        include_once "../Lhaja-Repo/src/Views/Auth/register.php";
+    }
+
     public function logout(): void
     {
         $this->authService->logout();
-        header('Location: /login');
+        header('Location: /login.php');
         exit;
     }
 }

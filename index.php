@@ -16,7 +16,7 @@ foreach(Route::getRoutes()[$method] as $route) {
         $isFound = true;
         $controllerName = $route['class'];
         $actionName = $route['action'];
-        $controllerObject = new $controllerName(Database::getInstance());
+        $controllerObject = new $controllerName();
         $controllerObject->$actionName();
     }
 }

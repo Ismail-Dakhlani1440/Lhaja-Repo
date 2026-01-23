@@ -64,7 +64,7 @@
                 <div class="card p-4">
                     <h3 class="text-center mb-4 form-title">Connexion CareerLink</h3>
 
-                    <form>
+                    <form action ="" method="get" >
 
                         <div class="mb-3">
                             <input type="email"  name ="email" class="form-control" placeholder="Adresse email" required>
@@ -88,7 +88,7 @@
                         </p>
 
                         <!-- Bouton retour accueil -->
-                        <a href="/home" class="btn-home">
+                        <a href="home" class="btn-home">
                             ← Retour à l'accueil
                         </a>
                     </div>
