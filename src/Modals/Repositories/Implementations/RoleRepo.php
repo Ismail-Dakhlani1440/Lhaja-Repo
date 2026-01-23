@@ -27,13 +27,9 @@ class RoleRepo extends BaseRepo
     public function fetchByProperty($property, $value)
     {
         $rows = parent::fetchByProperty($property, $value);
-        if (is_array($rows[0])) {
-            $roles = [];
-            foreach ($rows as $row) {
-                $roles[] = RoleMapper::map($row);
-            }
-        } else {
-            $roles = [RoleMapper::map($rows)];
+        $roles = [];
+        foreach ($rows as $row) {
+            $roles[] = RoleMapper::map($row);
         }
         return $roles;
     }
@@ -54,5 +50,4 @@ class RoleRepo extends BaseRepo
     {
         return parent::delete($id);
     }
-
 }

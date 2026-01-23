@@ -24,6 +24,7 @@ class UserMapper{
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),
+                'role' => $user->getRole()->getTitle(),
                 'roleId' => $user->getRole()->getId(),
             ];
         }else if ($user instanceof Recruteur){
@@ -31,6 +32,7 @@ class UserMapper{
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),
+                'role' => $user->getRole()->getTitle(),
                 'roleId' => $user->getRole()->getId(),
                 'companyName' => $user->getCompanyName(),
                 'companyDomain' => $user->getCompanyDomain(),
@@ -40,6 +42,7 @@ class UserMapper{
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),
+                'role' => $user->getRole()->getTitle(),
                 'roleId' => $user->getRole()->getId(),
                 'minSalaire' => $user->getMinSalaire(),
             ];
