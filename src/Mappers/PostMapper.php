@@ -11,7 +11,7 @@ class PostMapper
         return new Post($category,$recruteur,$row['lieu'], $row['mission'], $row['salaire'], $row['id']);
     }
 
-    public static function reversemap($post) {
+    public static function reverseMap($post) {
         return [
             'category' => $post->getCategory()->getId(),
             'recruteur' => $post->getRecruteur()->getId(),

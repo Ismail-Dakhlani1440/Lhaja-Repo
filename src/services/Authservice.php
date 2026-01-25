@@ -2,7 +2,7 @@
 
 namespace App\services;
 
-use App\Models\Repositories\Implementation;
+use App\Modals\Repositories\Implementations\UserRepo;
 
 class AuthService
 {
@@ -17,7 +17,7 @@ class AuthService
 
     public function register($data)
     {
-        if ($this->userRepo->findByProperty('email',$data['email'])) {
+        if ($this->userRepo->fetchByProperty('email',$data['email'])) {
             $error ='invalid credentials';
             return $error;
         }
@@ -37,9 +37,9 @@ class AuthService
   
     public function login($email, $password)
     {
-        $user = $this->userRepo->findByProperty('email',$email);
+        $user = $this->userRepo->fetchByProperty('email',$email);
 
-        if (!$user || !password_verify($password, $user['password'])) {
+        if (count($user) !=1 || !password_verify($password, $user[0]->getPassword())) {
             return false;
         }
 
