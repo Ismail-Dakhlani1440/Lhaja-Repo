@@ -1,10 +1,5 @@
 <?php
 
-namespace App\Modals\Repositories\Implementations;
-
-use App\Modals\Repositories\Implementations\BaseRepo;
-use App\Mappers\RoleMapper;
-
 class RoleRepo extends BaseRepo
 {
     private static $table = "roles";
@@ -27,9 +22,13 @@ class RoleRepo extends BaseRepo
     public function fetchByProperty($property, $value)
     {
         $rows = parent::fetchByProperty($property, $value);
-        $roles = [];
-        foreach ($rows as $row) {
-            $roles[] = RoleMapper::map($row);
+        if (is_array($rows[0])) {
+            $roles = [];
+            foreach ($rows as $row) {
+                $roles[] = RoleMapper::map($row);
+            }
+        } else {
+            $roles = [RoleMapper::map($rows)];
         }
         return $roles;
     }
@@ -40,14 +39,4 @@ class RoleRepo extends BaseRepo
         return parent::insert($data);
     }
 
-    public function edit($id, $objet)
-    {
-        $data = RoleMapper::reverseMap($objet);
-        return parent::edit($id, $data);
-    }
-
-    public function delete($id)
-    {
-        return parent::delete($id);
-    }
 }

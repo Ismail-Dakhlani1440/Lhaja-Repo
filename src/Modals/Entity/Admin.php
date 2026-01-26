@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Modals\Entity;
-
-use App\Modals\Entity\User;
-use App\Modals\Entity\Archive;
 
 class Admin extends User{
 
@@ -20,5 +16,6 @@ class Admin extends User{
     return $archive;
    }
 
+   
 
 }

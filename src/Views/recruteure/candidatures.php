@@ -73,6 +73,7 @@
                         <th>Poste postulé</th>
                         <th>Email</th>
                         <th>Téléphone</th>
+                        <th>CV</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -83,6 +84,7 @@
                         <td>Développeur Full Stack</td>
                         <td>mouna@example.com</td>
                         <td>06 12 34 56 78</td>
+                        <td><a href="#" class="btn btn-outline-secondary btn-sm">Voir CV</a></td>
                         <td>
                             <button class="btn btn-main btn-sm">Accepter</button>
                             <button class="btn btn-refuse btn-sm">Refuser</button>
@@ -94,6 +96,7 @@
                         <td>Chef de Projet Marketing</td>
                         <td>ahmed@example.com</td>
                         <td>06 87 65 43 21</td>
+                        <td><a href="#" class="btn btn-outline-secondary btn-sm">Voir CV</a></td>
                         <td>
                             <button class="btn btn-main btn-sm">Accepter</button>
                             <button class="btn btn-refuse btn-sm">Refuser</button>
@@ -105,6 +108,7 @@
                         <td>Analyste Financier</td>
                         <td>laila@example.com</td>
                         <td>06 98 76 54 32</td>
+                        <td><a href="#" class="btn btn-outline-secondary btn-sm">Voir CV</a></td>
                         <td>
                             <button class="btn btn-main btn-sm">Accepter</button>
                             <button class="btn btn-refuse btn-sm">Refuser</button>
@@ -113,7 +117,6 @@
                 </tbody>
             </table>
         </div>
-        <br>
 
     </div>
 </body>

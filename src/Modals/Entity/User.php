@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Modals\Entity;
 
-abstract class User
+class User
 {
     protected $id;
     protected $name;
@@ -24,46 +23,46 @@ abstract class User
         $this->role = $role;
     }
 
-    public function setId($id)
+    public function setid($id)
     {
         $this->id = $id;
     }
-    public function setName($name)
+    public function setname($name)
     {
         $this->name = $name;
     }
-    public function setEmail($email)
+    public function setemail($email)
     {
         $this->email = $email;
     }
-    public function setPassword($password)
+    public function setpassword($password)
     {
         $this->password = $password;
     }
-    public function setRole($role)
+    public function setrolid($role)
     {
-        $this->role = $role;
+        $this->roleId = $role;
     }
 
 
-    public function getId()
+    public function getid()
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getname()
     {
         return $this->name;
     }
-    public function getEmail()
+    public function getemail()
     {
         return $this->email;
     }
-    public function getPassword()
+    public function getpassword()
     {
         return $this->password;
     }
-    public function getRole()
+    public function getroleid()
     {
         return $this->role;
     }

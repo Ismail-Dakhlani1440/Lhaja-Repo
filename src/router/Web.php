@@ -1,6 +1,4 @@
 <?php
-
-use App\Controllers\RecruteurController;
 use App\router\Route;
 use App\Controllers\TestController;
 
@@ -24,14 +22,9 @@ Route::get('/dashboardCandidate', TestController::class, 'dashboardCandidate');
 
 Route::get('/JobsRecommandés', TestController::class, 'JobsRecommandés');
 
+Route::get('/dashboardRecruteur', TestController::class, 'dashboardRecruteur');
+
 Route::get('/candidatures', TestController::class, 'candidatures');
-
-// rexcruteur routes
-Route::get('/dashboardRecruteur', RecruteurController::class, 'dashboardRecruteur');
-
-Route::post('/recruteur/add_post', RecruteurController::class, 'addPost');
-Route::post('/recruteur/update_post', RecruteurController::class, 'updatePost');
-Route::post('/recruteur/delete_post', RecruteurController::class, 'deletePost');
 
 
 

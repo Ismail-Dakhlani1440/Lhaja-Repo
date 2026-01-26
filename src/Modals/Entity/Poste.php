@@ -1,11 +1,9 @@
 <?php
-
-namespace App\Modals\Entity;
-
-class Post
+class Poste
 {
     private $id;
     private $lieu;
+    private $position;
     private $mission;
     private $salaire;
     private $category;
@@ -14,6 +12,7 @@ class Post
 
 
     public function __construct(
+        $position,
         $category,
         $recruteur,
         $lieu = "",
@@ -22,6 +21,7 @@ class Post
         $id = null
     ) {
         $this->id = $id;
+        $this->position = $position;
         $this->category = $category;
         $this->recruteur = $recruteur;
         $this->lieu = $lieu;
@@ -29,66 +29,59 @@ class Post
         $this->salaire = $salaire;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-
-    public function getCategorie()
-    {
+    public function getPoste() {
+        return $this->position;
+    }
+    public function getCategorie() {
         return $this->category;
     }
-    public function getRecruteur()
-    {
+    public function getRecruteure() {
         return $this->recruteur;
     }
-    public function getLieu()
-    {
+    public function getLieu() {
         return $this->lieu;
     }
-    public function getMission()
-    {
+    public function getMission() {
         return $this->mission;
     }
-    public function getSalaire()
-    {
+    public function getSalaire() {
         return $this->salaire;
     }
-    public function getSkills()
-    {
+    public function getSkills() {
         return $this->skills;
     }
 
 
-    public function setId($id)
-    {
-        $this->id = $id;
+    public function setId($id) {
+         $this->id = $id;
     }
-    public function setCategorie($category)
-    {
-        $this->category = $category;
+    public function setPosition($position) {
+        $this->position = $position;
     }
-    public function setRecruteure($recruteur)
-    {
-        $this->recruteur = $recruteur;
+    public function setCategorie($category) {
+         $this->category = $category;
     }
-    public function setLieu($lieu)
-    {
-        $this->lieu = $lieu;
+    public function setRecruteure($recruteur) {
+         $this->recruteur = $recruteur;
     }
-    public function setMission($mission)
-    {
-        $this->mission = $mission;
+    public function setLieu($lieu) {
+         $this->lieu = $lieu;
     }
-    public function setSalaire($salaire)
-    {
-        $this->salaire = $salaire;
+    public function setMission($mission) {
+         $this->mission = $mission;
+    }
+    public function setSalaire($salaire) {
+         $this->salaire = $salaire;
+    }
+    
+    public function addskills($title , $category , $id = null) {
+        $addskills = new Skills($this , $title , $category , $id);
+        $this->skills[] = $addskills; 
+        return $addskills;
     }
 
-    public function addskills($title, $category, $id = null)
-    {
-        $skill = new Skill($this, $title, $category, $id);
-        $this->skills[] = $skill;
-        return $skill;
-    }
+
 }

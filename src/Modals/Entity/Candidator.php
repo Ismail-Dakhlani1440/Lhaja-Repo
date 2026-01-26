@@ -1,8 +1,5 @@
 <?php
-
-namespace App\Modals\Entity;
-
-class Postulation
+class Candidator
 {
     private $candidat;
     private $poste;
@@ -24,35 +21,35 @@ class Postulation
         $this->datePostulation = $datePostulation;
     }
 
-    public function getCandidat(){
+    public function getcandidate(){
         return $this->candidat;
     }
-    public function getPoste(){
+    public function getposte(){
         return $this->poste;
     }
-    public function getMotif(){
+    public function getmotif(){
         return $this->motif;
     }
-    public function getStatus(){
+    public function getstatus(){
         return $this->status;
     }
-    public function getDatePostulation(){
+    public function getdatepostulation(){
         return $this->datePostulation;
     }
 
-    public function setCandidat($candidat){
+    public function setcandidat($candidat){
         $this->candidat = $candidat;
     }
-    public function setPoste($poste){
+    public function setposte($poste){
          $this->poste = $poste;
     }
-    public function setMotif($motif){
+    public function setmotif($motif){
             $this->motif = $motif;
     }
-    public function setStatus($status){
+    public function setstatus($status){
          $this->status = $status;
     }
-    public function setDatePostulation($datePostulation){
+    public function setdatepostulation($datePostulation){
           $this->datePostulation = $datePostulation;
     }
 }

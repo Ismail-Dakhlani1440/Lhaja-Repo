@@ -4,10 +4,8 @@ namespace App\Controllers;
 
 abstract class AbstractController
 {
-    protected function getView(string $path, array $data = [])
+        protected function getView(string $path)
     {
-        extract($data);
-        
         $templateName = __DIR__ . '/../Views/' . $path;
         require_once $templateName;
     }

@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Mappers;
-
-use App\Modals\Entity\Role;
-
 class RoleMapper{
 
     public static function map($row){
         return new Role($row['id'], $row['title']);
     }
 
-    public static function reverseMap($role){
+    public static function reverseMap($objet){
         return [
-            'title' => $role->getTitle()
+            'id' => $objet->getId(),
+            'title' => $objet->getTitle(),
         ];
     }
 }
