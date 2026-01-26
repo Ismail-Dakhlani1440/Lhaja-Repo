@@ -3,8 +3,6 @@
 namespace App\Modals\Repositories\Implementations;
 
 use App\Modals\Repositories\Implementations\BaseRepo;
-use App\Modals\Repositories\Implementations\CategoryRepo;
-use App\Modals\Repositories\Implementations\userRepo;
 use App\Mappers\PostMapper;
 
 class PostRepo extends BaseRepo
@@ -56,3 +54,4 @@ class PostRepo extends BaseRepo
         parent::delete($id);
     }
 }
+
