@@ -204,7 +204,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- <?php dd($posts) ?> -->
             <!-- Offre 2 -->
             <div class="col-md-4">
                 <div class="offer-card">
@@ -218,16 +218,17 @@
                         <span class="badge-tag">Excel</span>
                         <span class="badge-tag">Reporting</span>
                     </div>
-
                     <div class="card-buttons">
-                        <button class="btn btn-main btn-sm">Modifier</button>
-                        <button class="btn btn-secondary btn-sm">Supprimer</button>
+                        <form name="update" method="POST" action="/RecruteurController">
+                            <button type="submit" class="btn btn-main btn-sm">Modifier</button>
+                        </form>
+                        <form name="delete" method="POST" action="/RecruteurController">
+                            <button type="submit" class="btn btn-secondary btn-sm">Supprimer</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- Modal Ajouter Offre -->
@@ -241,25 +242,25 @@
                 </div>
 
                 <div class="modal-body">
-                    <form>
+                    <form method="POST" action="/recruteur/add_post">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Titre du poste" required>
+                            <input name="post" type="text" class="form-control" placeholder="Titre du poste" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Skills requis (PHP, React...)" required>
+                            <input name="mission" type="text" class="form-control" placeholder="Mission" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Salaire" required>
+                            <input name="salary" type="text" class="form-control" placeholder="Salaire" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Lieu" required>
+                            <input name="lieu" type="text" class="form-control" placeholder="Lieu" required>
                         </div>
 
                         <div class="mb-3">
-                            <select class="form-select">
+                            <select name="category" class="form-select">
                                 <option selected>Choisir une catégorie</option>
                                 <option value="1">Technologie</option>
                                 <option value="2">Marketing</option>
@@ -268,10 +269,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Tags (séparés par des virgules)">
+                            <input name="tags" type="text" class="form-control" placeholder="Tags (séparés par des virgules)">
                         </div>
 
-                        <button type="submit" class="btn btn-main w-100">
+                        <button type="submit" class="btn btn-main w-100" name="ajoute">
                             Ajouter Offre
                         </button>
                     </form>
