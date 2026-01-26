@@ -1,41 +1,32 @@
 <?php
 
-namespace App\services;
+namespace App\Services;
 
 use App\Modals\Repositories\Implementations\UserRepo;
+
 
 class AuthService
 {
     private UserRepo $userRepo;
 
-    public function __construct($userRepo)
+    public function __construct(UserRepo $userRepo)
     {
         $this->userRepo = $userRepo;
-
-        
     }
 
     public function register($data)
     {
-        if ($this->userRepo->fetchByProperty('email',$data['email'])) {
+        if ($this->userRepo->fetchByProperty('u.email',$data['email'])) {
             $error ='invalid credentials';
             return $error;
         }
 
-        $passwordHash = password_hash($data['password'], PASSWORD_DEFAULT);
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $this->userRepo->insert([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => $passwordHash,
-            'role'     => $data['role']
-        ]);
-
-        return null;
+        return $this->userRepo->insert($data);
     }
 
-  
-    public function login($email, $password)
+    public function login(string $email, string $password): bool
     {
         $user = $this->userRepo->fetchByProperty('email',$email);
 
@@ -43,15 +34,20 @@ class AuthService
             return false;
         }
 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role']    = $user['role'];
-        $_SESSION['email']   = $user['email'];
+        session_regenerate_id(true);
+        $_SESSION['user'] = [
+            'id'    => $user->getId(),
+            'email' => $user->getEmail(),
+            // Assuming Role object has a getTitle() method
+            'role'  => $user->getRole()->getTitle(), 
+        ];
 
         return true;
     }
 
-    public function logout()
+    public function logout(): void
     {
+        session_unset();
         session_destroy();
     }
 }

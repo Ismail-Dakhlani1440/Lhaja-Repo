@@ -70,92 +70,94 @@
                     <!-- Choix du rôle -->
                     <div class="mb-4">
                         <label class="form-label fw-bold">Je suis :</label>
-                        <select class="form-select" id="roleSelect">
+                        <select class="form-select" name="role" id="roleSelect">
                             <option value="">-- Choisir un rôle --</option>
                             <option value="candidate">Candidat</option>
                             <option value="recruiter">Recruteur</option>
                         </select>
+
+
                     </div>
 
                     <!-- FORM CANDIDAT -->
-                    <form id="candidateForm" style="display:none;">
+                    <form id="candidateForm" style="display:none;" action="/register" method="post">
                         <h5 class="mb-3 text-success">Inscription Candidat</h5>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Nom complet" required>
+                            <input type="text" name="name" class="form-control" placeholder="Nom complet" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Mot de passe" required>
+                            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Confirmation mot de passe" required>
+                            <input type="password" name="passwordConfirm" class="form-control" placeholder="Confirmation mot de passe" required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Titre professionnel">
+                                <input type="text" name="titre" class="form-control" placeholder="Titre professionnel">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Compétences (PHP, React...)">
+                                <input type="text" name="compétences" class="form-control" placeholder="Compétences (PHP, React...)">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <input type="number" class="form-control" placeholder="Salaire minimum souhaité (MAD)">
+                                <input type="number" name="salaire" class="form-control" placeholder="Salaire minimum souhaité (MAD)">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Ville">
+                                <input type="text" name="ville" class="form-control" placeholder="Ville">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-main text-white w-100 mt-3">
+                        <button type="submit" name="candidat" class="btn btn-main text-white w-100 mt-3">
                             Créer mon compte candidat
                         </button>
                     </form>
 
                     <!-- FORM RECRUTEUR -->
-                    <form id="recruiterForm" style="display:none;">
+                    <form id="recruiterForm" style="display:none;" action="" method="post">
                         <h5 class="mb-3 text-primary">Inscription Recruteur</h5>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Nom du recruteur" required>
+                            <input type="text" name="name" class="form-control" placeholder="Nom du recruteur" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email professionnel" required>
+                            <input type="email" name="email" class="form-control" placeholder="Email professionnel" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Mot de passe" required>
+                            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Confirmation mot de passe" required>
+                            <input type="password" name="passwordConfirm" class="form-control" placeholder="Confirmation mot de passe" required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Nom de l'entreprise" required>
+                                <input type="text" name="nomentreprise" class="form-control" placeholder="Nom de l'entreprise" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" name="categories"
                                     placeholder="Catégorie / Domaine de l'entreprise">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Ville">
+                                <input type="text" name="ville" class="form-control" placeholder="Ville">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-main text-white w-100 mt-3">
+                        <button type="submit" name="recruteur" class="btn btn-main text-white w-100 mt-3">
                             Créer mon compte recruteur
                         </button>
                     </form>
@@ -172,21 +174,21 @@
         const candidateForm = document.getElementById("candidateForm");
         const recruiterForm = document.getElementById("recruiterForm");
 
-        roleSelect.addEventListener("change", function () {
+        roleSelect.addEventListener("change", function() {
             if (this.value === "candidate") {
                 candidateForm.style.display = "block";
                 recruiterForm.style.display = "none";
-            }
-            else if (this.value === "recruiter") {
+            } else if (this.value === "recruiter") {
                 recruiterForm.style.display = "block";
                 candidateForm.style.display = "none";
-            }
-            else {
+            } else {
                 candidateForm.style.display = "none";
                 recruiterForm.style.display = "none";
             }
         });
     </script>
 
+
 </body>
+
 </html>

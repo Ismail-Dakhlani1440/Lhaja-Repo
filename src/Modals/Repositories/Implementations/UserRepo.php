@@ -79,4 +79,9 @@ class UserRepo extends BaseRepo
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$id]);
     }
+<<<<<<< HEAD
+
 }
+=======
+}
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c

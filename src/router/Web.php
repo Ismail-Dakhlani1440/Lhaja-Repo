@@ -8,7 +8,9 @@ Route::get('/home', TestController::class, 'home');
 
 Route::get('/login', TestController::class, 'login');
 
-Route::get('/register', TestController::class, 'register');
+Route::get('/register', AuthController::class, 'getViewRegister');
+Route::post('/register', AuthController::class, 'register');
+
 
 Route::get('/', TestController::class, 'home');
 

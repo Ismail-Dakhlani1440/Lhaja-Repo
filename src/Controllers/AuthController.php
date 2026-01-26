@@ -2,58 +2,85 @@
 
 namespace App\Controllers;
 
+use App\Modals\Repositories\Implementations\RoleRepo;
+use App\Modals\Repositories\Implementations\UserRepo;
 use App\Services\AuthService;
 
-class AuthController
+class AuthController extends AbstractController
 {
-    private AuthService $authService;
+    private $authService;
 
     public function __construct()
     {
-        $this->authService = new AuthService();
+        // FIX: Chain the dependencies correctly
+        // RoleRepo -> goes into -> UserRepo -> goes into -> AuthService
+        $roleRepo = new RoleRepo();
+        $userRepo = new UserRepo($roleRepo);
+
+        $this->authService = new AuthService($userRepo);
     }
 
-    
-    public function register()
+    public function register(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
-        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
-        if ($_POST['password'] !== $_POST['password_confirm']) {
+        $passwordConfirm = $_POST['passwordConfirm'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        if ($password !== $passwordConfirm) {
             die("Les mots de passe ne correspondent pas");
         }
 
+        // Simplify data gathering
         $data = [
             'name'     => trim($_POST['name']),
             'email'    => trim($_POST['email']),
-            'password' => $_POST['password'],
-            'role'     => $_POST['role']
+            'password' => $password,
         ];
 
+        // Specific logic
+        if (isset($_POST['candidat'])) {
+            $data['roleId'] = 2; // Example ID for Candidate
+            // Add other candidate fields...
+        } elseif (isset($_POST['recruteur'])) {
+            $data['roleId'] = 3; // Example ID for Recruiter
+            // Add other recruiter fields...
+        }
+
         if ($this->authService->register($data)) {
-            echo "Compte créé avec succès";
+            header('Location: /login');
+            exit;
         } else {
-            echo "Email déjà utilisé";
+            echo "Erreur lors de l'inscription";
         }
     }
 
-    public function login()
+    public function login(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
-        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
         if ($this->authService->login($_POST['email'], $_POST['password'])) {
-            echo "Connexion réussie";
-        } else {
-            echo "Email ou mot de passe incorrect";
+            // Redirect based on the session role set in AuthService
+            if ($_SESSION['user']['role'] === 'recruiter') {
+                header('Location: /recruteur/dashboard.php');
+            } else {
+                header('Location: /candidate/dashboard.php');
+            }
+            exit;
         }
+
+        echo "Email ou mot de passe incorrect";
     }
 
-    public function logout()
+    public function getViewRegister()
+    {
+        include_once "../Lhaja-Repo/src/Views/Auth/register.php";
+    }
+
+    public function logout(): void
     {
         $this->authService->logout();
-        echo "Déconnecté";
+        header('Location: /login.php');
+        exit;
     }
 }
