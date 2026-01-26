@@ -6,7 +6,6 @@ class Post
 {
     private $id;
     private $lieu;
-    private $position;
     private $mission;
     private $salaire;
     private $category;
@@ -15,7 +14,6 @@ class Post
 
 
     public function __construct(
-        $position,
         $category,
         $recruteur,
         $lieu = "",
@@ -24,7 +22,6 @@ class Post
         $id = null
     ) {
         $this->id = $id;
-        $this->position = $position;
         $this->category = $category;
         $this->recruteur = $recruteur;
         $this->lieu = $lieu;
@@ -36,10 +33,7 @@ class Post
     {
         return $this->id;
     }
-    public function getPoste()
-    {
-        return $this->position;
-    }
+
     public function getCategorie()
     {
         return $this->category;
@@ -69,10 +63,6 @@ class Post
     public function setId($id)
     {
         $this->id = $id;
-    }
-    public function setPosition($position)
-    {
-        $this->position = $position;
     }
     public function setCategorie($category)
     {

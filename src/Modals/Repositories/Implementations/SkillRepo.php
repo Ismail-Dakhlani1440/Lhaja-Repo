@@ -29,13 +29,10 @@ class SkillRepo extends BaseRepo
     public function fetchByProperty($property, $value)
     {
         $rows = parent::fetchByProperty($property, $value);
-        if (is_array($rows[0])) {
-            $skills = [];
-            foreach ($rows as $row) {
-                $skills[] = SkillMapper::map($row, $this->categoryRepo->fetchByProperty('id', $row['categoryId']));
-            }
-        } else {
-            $skills = [SkillMapper::map($rows, $this->categoryRepo->fetchByProperty('id', $rows['categoryId']))]; 
+        $skills = [];
+        
+        foreach ($rows as $row) {
+            $skills[] = SkillMapper::map($row, $this->categoryRepo->fetchByProperty('id', $row['categoryId']));
         }
         return $skills;
     }

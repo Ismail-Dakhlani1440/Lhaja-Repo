@@ -2,7 +2,7 @@
 
 namespace App\Modals\Entity;
 
-class User
+abstract class User
 {
     protected $id;
     protected $name;

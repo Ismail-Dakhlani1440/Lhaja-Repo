@@ -2,10 +2,10 @@
 
 namespace App\Modals\Repositories\Implementations;
 use App\Modals\DB\Database;
-use App\Modals\Repositories\Interfaces\FetchInterface;
-use App\Modals\Repositories\Interfaces\InsertIterface;
-use App\Modals\Repositories\Interfaces\EditInterface;
-use App\Modals\Repositories\Interfaces\DeleteIterface;
+use App\Modals\Repositories\FetchInterface;
+use App\Modals\Repositories\InsertIterface;
+use App\Modals\Repositories\EditInterface;
+use App\Modals\Repositoriesa\DeleteIterface;
 use PDO;
 
 abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,DeleteIterface
@@ -34,7 +34,7 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->tableName . " WHERE " . $property . " = :" . $property);
         $stmt->bindParam(':' . $property, $value);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     // returns null or an array of objects that matches the property 
 
@@ -46,7 +46,7 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         foreach ($data as $key => $value) {
             $stmt->bindValue(':' . $key, $value);
         }
-        return $stmt->execute();
+        $stmt->execute();
     }
     // retuns the null or the last id insterted into the table of the repo called
 
@@ -64,7 +64,7 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
         foreach ($data as $key => $value) {
             $stmt->bindValue(':' . $key, $value);
         }
-        $stmt->execute([$id]);
+        return $stmt->execute([$id]);
     }
     //returns True or False based on if it finds the data in the database
 
@@ -73,7 +73,7 @@ abstract class BaseRepo implements FetchInterface,EditInterface,InsertIterface,D
     {
         $query = "DELETE FROM {$this->tableName} WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id]);
+        return $stmt->execute([$id]);
     }
     //returns True or False based on if it finds the data in the database
 }
