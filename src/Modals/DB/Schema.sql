@@ -18,8 +18,12 @@ CREATE TABLE users (
 
 CREATE TABLE candidats (
     user_id INT PRIMARY KEY,
+<<<<<<< HEAD
+    FOREIGN KEY (user_id) REFERENCES users(id) 
+=======
     min_salaire DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+>>>>>>> c05d7f4b896c7092c0853726dd2db5db0e631a3c
 );
 
 CREATE TABLE recruteurs (

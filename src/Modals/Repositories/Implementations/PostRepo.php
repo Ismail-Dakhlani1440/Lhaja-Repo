@@ -54,3 +54,4 @@ class PostRepo extends BaseRepo
         parent::delete($id);
     }
 }
+
