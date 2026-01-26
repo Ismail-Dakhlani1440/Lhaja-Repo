@@ -13,14 +13,14 @@ class RecruteurController extends AbstractController
 {
     public function __construct()
     {
-        // if (!isset($_SESSION['user'])) {
-        //     $this->redirect('/');
-        // } else {
-        //     $user = $_SESSION['user'];
-        //     if ($user['role'] !== 'recruteur') {
-        //         $this->redirect('/');
-        //     } 
-        // }
+        if (!isset($_SESSION['user'])) {
+            $this->redirect('/');
+        } else {
+            $user = $_SESSION['user'];
+            if ($user['role'] !== 'recruteur') {
+                $this->redirect('/');
+            } 
+        }
     }
 
     public function dashboardRecruteur()
