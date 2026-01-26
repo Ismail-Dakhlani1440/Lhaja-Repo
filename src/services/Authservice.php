@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Modals\Repositories\Implementations\UserRepo;
 
+
 class AuthService
 {
     private UserRepo $userRepo;
