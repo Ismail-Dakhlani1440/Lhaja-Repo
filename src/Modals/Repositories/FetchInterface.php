@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Modals\Repositories\Interfaces;
+namespace App\Modals\Repositories;
 
 interface FetchInterface
 {
