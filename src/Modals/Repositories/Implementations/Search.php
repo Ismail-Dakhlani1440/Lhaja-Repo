@@ -12,28 +12,21 @@ class Search
    public function __construct(){
    $this->pdo = Database::getInstance();
 }
-    public function search($keyword)
-    {
+   public function search($keyword)
+{
+    $sql = "SELECT * FROM postes 
+            WHERE poste LIKE :keyword 
+               OR lieu LIKE :keyword 
+               OR mission LIKE :keyword";
 
-        $sql = "SELECT id, lieu, poste, mission , salaire 
-                FROM postes
-                WHERE lieu LIKE :keyword
-                   OR post LIKE :keyword
-                   OR mission LIKE :keyword
-                LIMIT 10";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        ':keyword' => '%' . $keyword . '%'
+    ]);
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            ':keyword' => "%$keyword%"
-            ]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-           $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-    
-        
-    }
 }
 
 

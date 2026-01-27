@@ -3,6 +3,7 @@
 use App\Controllers\RecruteurController;
 use App\router\Route;
 use App\Controllers\TestController;
+use App\Controllers\SearchController;
 
 Route::get('/home', TestController::class, 'home');
 
@@ -25,6 +26,10 @@ Route::get('/dashboardCandidate', TestController::class, 'dashboardCandidate');
 Route::get('/JobsRecommandés', TestController::class, 'JobsRecommandés');
 
 Route::get('/candidatures', TestController::class, 'candidatures');
+
+Route::get('/search', SearchController::class, 'search');
+
+Route::get('/api', SearchController::class, 'api');
 
 // rexcruteur routes
 Route::get('/dashboardRecruteur', RecruteurController::class, 'dashboardRecruteur');

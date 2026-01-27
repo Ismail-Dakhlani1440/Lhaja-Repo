@@ -101,7 +101,10 @@
 
         <!-- Filtres -->
         <div class="filters">
-            <input type="text" class="form-control d-inline-block w-auto" placeholder="Recherche mots-clés">
+                 <form method="GET" action="search">
+                     <input id="search" type="text" class="form-control d-inline-block w-auto" placeholder="Recherche mots-clés">
+                     <ul class="list-group" id="result"></ul>
+                 </form>
             <select class="form-select d-inline-block w-auto">
                 <option selected>Toutes les catégories</option>
                 <option value="tech">Technologie</option>
@@ -166,7 +169,7 @@
         </div>
 
     </div>
-
+    <script src="../src/Views/js/search/search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
