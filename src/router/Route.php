@@ -19,4 +19,6 @@ class Route {
     public static function getRoutes() {
         return self::$routes;
     }
-}
+
+
+    }

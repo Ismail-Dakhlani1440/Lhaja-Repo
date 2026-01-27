@@ -14,11 +14,12 @@ class Database
         $host = "localhost";
         $dbname = "emploi";
         $user = "root";
+        $port = "3308";
        $pass = "";
 
         try {
             $this->connection = new PDO(
-                "mysql:host=$host;dbname=$dbname;charset=utf8",
+                "mysql:host=$host;dbname=$dbname;port=$port;charset=utf8",
                 $user,
                 $pass
             );
